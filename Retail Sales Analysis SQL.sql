@@ -21,37 +21,54 @@ create table retail_sales
 );
 
 # Display all records from the table (After importing from the excel dataset) 
-select * from retail_sales;
+select * 
+from retail_sales;
 
 # Count the number of Records 
-select COUNT(*) AS No_of_Records from retail_sales;
+select COUNT(*) AS No_of_Records 
+from retail_sales;
 
 # Cout the number of unique Customers
-select count(distinct customer_id) as "Customer Count" from retail_sales;
+select count(distinct customer_id) as "Customer Count" 
+from retail_sales;
 
 # Count the number of unique products categories
-select count(distinct category) as "Product Category Count" from retail_sales;
+select count(distinct category) as "Product Category Count" 
+from retail_sales;
 
 # Display the unique products categories
-select distinct category from retail_sales;
+select distinct category 
+from retail_sales;
 
 # Check the minimuma and maximum age for the different genders
-select gender, min(age), max(age) from retail_sales group by gender;
+select 
+	gender, 
+	min(age), 
+	max(age) 
+from retail_sales 
+group by gender;
 
 # Check the average age of all customers
-select round(avg(age)) from retail_sales;
+select round(avg(age)) 
+from retail_sales;
 
 # Check the average age of all the different genders
-select gender, round(avg(age)) from retail_sales group by gender;
+select 
+	gender, 
+	round(avg(age)) 
+from retail_sales group by gender;
 
 # Check for Null Values
-select * from retail_sales where 
+select * 
+from retail_sales 
+where 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
     gender IS NULL OR age IS NULL OR category IS NULL OR 
     quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
     
 # Delete Null Values
-delete from retail_sales where 
+delete from retail_sales 
+where 
     sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR 
     gender IS NULL OR age IS NULL OR category IS NULL OR 
     quantity IS NULL OR price_per_unit IS NULL OR cogs IS NULL;
@@ -61,22 +78,28 @@ alter table retail_sales
 add column Profit float as (total_sale - cogs) stored;
 
 # TOTAL REVENUE GENERATED IN 2022 for each category in descending order
-select category, sum(total_sale) from retail_sales 
-	where sale_date >= '2022-01-01' 
-	AND sale_date <= '2022-12-31'
-    group by category
-	order by sum(total_sale) desc;
+select 
+	category, 
+	sum(total_sale) 
+from retail_sales 
+where sale_date >= '2022-01-01' 
+AND sale_date <= '2022-12-31'
+group by category
+order by sum(total_sale) desc;
     
 /* Transactions where the customer is above 40 years old and purchased items 
 	from the 'Electronics' category between March and June 2023. */
 select * from retail_sales
 where category = "Electronics"
-and age > 40
-and sale_date between '2023-03-01' and '2023-06-30';
+	and age > 40
+	and sale_date between '2023-03-01' and '2023-06-30';
 
 /* Calculate the total profit per category and display 
 	only categories with profit above 50,000. */
-select category, round(sum(profit), 2) as profit_made from retail_sales
+select c
+	ategory, 
+	round(sum(profit), 2) as profit_made 
+from retail_sales
 group by category
 having profit_made > 50000
 order by profit_made desc;
