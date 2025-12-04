@@ -25,19 +25,23 @@ select *
 from retail_sales;
 
 # Count the number of Records 
-select COUNT(*) AS No_of_Records 
+select 
+	COUNT(*) AS No_of_Records 
 from retail_sales;
 
 # Cout the number of unique Customers
-select count(distinct customer_id) as "Customer Count" 
+select 
+	count(distinct customer_id) as "Customer Count" 
 from retail_sales;
 
 # Count the number of unique products categories
-select count(distinct category) as "Product Category Count" 
+select 
+	count(distinct category) as "Product Category Count" 
 from retail_sales;
 
 # Display the unique products categories
-select distinct category 
+select 
+	distinct category 
 from retail_sales;
 
 # Check the minimuma and maximum age for the different genders
